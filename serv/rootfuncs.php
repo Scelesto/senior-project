@@ -1,10 +1,11 @@
 <?php
 define('ROOT','/Users/Abram/Documents/GitHub/senior-project/serv/');
+define('NL','
+');
 function prnt($text,$flags=array('nl')){
 	$flagfuncs=array(
 		"nl"=>function($text){
-			return str_replace('\n','
-',$text);
+			return str_replace('\n',NL,$text);
 		}
 	);
 	foreach($flags as $flag){
