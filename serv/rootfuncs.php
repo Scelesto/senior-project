@@ -1,6 +1,6 @@
 <?php
-define('ROOT','/Users/Abram/Documents/GitHub/senior-project/serv/');
-define('SERV','/webopt/');
+define('ROOT',dirname(__FILE__).'/');
+define('SERV',dirname($_SERVER['SCRIPT_NAME']).'/');
 define('CALL',preg_replace('/\?.*/','',substr($_SERVER['REQUEST_URI'],strlen(SERV))));
 define('NL','
 ');
