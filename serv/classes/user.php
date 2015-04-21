@@ -25,7 +25,7 @@ class user {
 		getClass("jobs");
 		$j=new jobs();
 		$j->routine();
-		header("Refresh: 0; url=".SERV."home");
+		header("Refresh: 1; url=".SERV."home");
 		die();
 	}
 }

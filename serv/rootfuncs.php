@@ -4,6 +4,7 @@ define('SERV','/webopt/');
 define('CALL',preg_replace('/\?.*/','',substr($_SERVER['REQUEST_URI'],strlen(SERV))));
 define('NL','
 ');
+define('HG','<script type="text/javascript" src="'.SERV.'pages/global.js"></script><link rel="StyleSheet" href="'.SERV.'pages/global.css" type="text/css"/>');
 function prnt($text,$flags=array('nl')){
 	$flagfuncs=array(
 		"nl"=>function($text){
