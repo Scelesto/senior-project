@@ -1,6 +1,7 @@
 <?php
 function read($name){
-	$file=fopen($name,"r");
+	try{$file=fopen($name,"r");}catch(Exception $e){$file=false;}
+	if(!$file){return false;}
 	$content=fread($file,filesize($name));
 	fclose($file);
 	return $content;
@@ -13,7 +14,7 @@ function write($name,$content){
 }
 $file=".htaccess";
 $check="configured.txt";
-if(read($check)=="no"){
+if(read($check)!="yes"){
 	write($file,preg_replace('/\#RewriteBase [^\s]*/','#RewriteBase '.dirname($_SERVER['SCRIPT_NAME']).'/',read($file)));
 	write($check,"yes");
 }
