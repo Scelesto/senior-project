@@ -20,6 +20,7 @@ function prnt($text,$flags=array('nl')){
 }
 function err($msg){
 	prnt('\n<!--\nSYSTEM ERROR.\n'.$msg.'\n-->\n');
+	die();
 }
 function getClass($name){
 	if(file_exists(ROOT.'classes/'.$name.'.php')){

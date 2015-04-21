@@ -1,5 +1,6 @@
 <?php
 $pages=array(
-	""=>"home.php"
+	""=>"home.php",
+	"home"=>"home.php"
 );
 ?>
