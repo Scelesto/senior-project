@@ -1,4 +1,4 @@
-				<?php
+<?php
 /*GLOBAL SETTINGS PAGE.
 
 ONLY USE BOOLEAN VALUES false AND true AS SPECIFIED.
