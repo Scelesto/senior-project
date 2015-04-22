@@ -22,11 +22,15 @@ class user {
 	}
 	function newuser(){
 		include(ROOT.'pages/newuser.php');
+		die();
+	}
+	function newuser2(){
 		getClass("jobs");
 		$j=new jobs();
 		$j->routine();
-		header("Refresh: 1; url=".SERV."home");
-		die();
+	}
+	function hasOldProjects(){
+		
 	}
 }
 ?>

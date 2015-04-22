@@ -7,5 +7,5 @@ In the "serv" folder there is the contents of a web application which serves thi
 
 - Make sure that your server supports PHP and HTACCESS.
 - Download the contents of the "serv" folder anywhere on your server.
-- In a web browser, visit "configure.php" to finish setting everything up.
-- If you decide to move the files after configuring once, delete "configured.txt" and visit "configure.php" again.
+- Make sure you like the settings in SETTINGS.php (if you're confused by anything, leave the defaults as they are.)
+- Open it up in your web browser.

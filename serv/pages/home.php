@@ -6,4 +6,11 @@ if(CALL==""){
 	die();
 }
 ?>
-WEB OPTIMIZATION PROTOCOL
+<html>
+<head>
+<?=HG?>
+</head>
+<body>
+
+</body>
+</html>

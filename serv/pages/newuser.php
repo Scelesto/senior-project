@@ -1,6 +1,13 @@
 <html>
 <head>
 <?=HG?>
+<script>
+$(function(){
+	$.get('<?=SERV?>runjobs.php',function(){
+		window.location="";
+	});
+});
+</script>
 </head>
 <body height="100%">
 <center style="position:relative;top:50%;-ms-transform:translateY(-50%);-webkit-transform:translateY(-50%);transform:translateY(-50%);">

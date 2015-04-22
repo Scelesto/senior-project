@@ -14,9 +14,9 @@ function write($name,$content){
 }
 $file=".htaccess";
 $check="configured.txt";
-if(read($check)!="yes"){
-	write($file,preg_replace('/\#RewriteBase [^\s]*/','#RewriteBase '.dirname($_SERVER['SCRIPT_NAME']).'/',read($file)));
-	write($check,"yes");
+$correct=dirname($_SERVER['SCRIPT_NAME']).'/';
+if(read($check)!=$correct){
+	write($file,preg_replace('/\#RewriteBase [^\s]*/','#RewriteBase '.$correct,read($file)));
+	write($check,$correct);
 }
-echo "SYSTEM CONFIGURED.";
 ?>
