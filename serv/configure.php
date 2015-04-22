@@ -15,7 +15,7 @@ function write($name,$content){
 $file=".htaccess";
 $check="configured.txt";
 $correct=dirname($_SERVER['SCRIPT_NAME']).'/';
-if(read($check)!=$correct){
+if(read($check)!=$correct||!defined('globAC')){
 	write($file,preg_replace('/\#RewriteBase [^\s]*/','#RewriteBase '.$correct,read($file)));
 	write($check,$correct);
 }

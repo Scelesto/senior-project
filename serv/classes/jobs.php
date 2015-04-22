@@ -1,7 +1,7 @@
 <?php
 class jobs {
 	function routine(){
-		$this->configure();
+		if(globAC){$this->configure();}
 	}
 	function configure(){
 		include(ROOT.'configure.php');
