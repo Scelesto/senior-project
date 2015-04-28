@@ -30,7 +30,7 @@ class user {
 		$j->routine();
 	}
 	function hasOldProjects(){
-		
+		return true;
 	}
 }
 ?>
