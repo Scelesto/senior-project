@@ -9,3 +9,5 @@ In the "serv" folder there is the contents of a web application which serves thi
 - Download the contents of the "serv" folder anywhere on your server.
 - Make sure you like the settings in SETTINGS.php (if you're confused by anything, leave the defaults as they are.)
 - Open it up in your web browser.
+
+###[PROJECT CREDITS](CREDITS.md "CREDITS")
