@@ -294,46 +294,75 @@
 					//declare function x(){}
 					//block
 					//create object
-					
+					//quoted
 					break;
 				case '}':
-					
+					//declare function(){}
+					//declare function x(){}
+					//block
+					//create object
+					//quoted
 					break;
 				case '!':
-					
+					//equality
+					//logunary
+					//quoted
 					break;
 				case '+':
-					
+					//assignment
+					//unary
+					//add
+					//quoted
 					break;
 				case '-':
-					
+					//assignment
+					//unary
+					//add
+					//quoted
 					break;
 				case '*':
-					
+					//assignment
+					//arithmetic
+					//statement
+					//quoted
 					break;
 				case '?':
-					
+					//ternary
+					//quoted
 					break;
 				case '%':
-					
+					//assignment
+					//arithmetic
+					//quoted
 					break;
 				case '<':
-					
+					//assignment
+					//relational
+					//bitshift
+					//quoted
 					break;
 				case '>':
-					
+					//assignment
+					//relational
+					//bitshift
+					//quoted
 					break;
 				case '~':
-					
+					//bitunary
+					//quoted
 					break;
 				case '^':
-					
+					//assignment
+					//bitwise
+					//quoted
 					break;
 				case ' ':
-					
+					//end of something
+					//quoted
 					break;
 				case '\n':
-					
+					//end of something
+					//quoted
 					break;
 			}
 		}
