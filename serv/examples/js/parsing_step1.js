@@ -46,7 +46,7 @@ code=[
 														value:'t'
 													}
 												]
-											}
+											},
 											dep:{
 												type:'housing/block',
 												code:[
@@ -158,7 +158,7 @@ code=[
 																					}
 																				}
 																			}
-																		}
+																		},
 																		after:{
 																			type:'operator/comma/0',
 																			ind:{
