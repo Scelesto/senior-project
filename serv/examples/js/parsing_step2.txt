@@ -1,0 +1,51 @@
+Object.defineProperty(Object.prototype,"extend",{value:function(e){var t=this,a=Array.prototype.slice.call(arguments,1);return function(){t.apply(this,a),e.apply(this,arguments)}}});
+
+code=[{type:"data/variable",value:"Object","do":{type:"operator/member/0",ind:{type:"attribute",value:"defineProperty","do":{type:"housing/call",ind:{type:"args/call",value:[{type:"data/variable",value:"Object","do":{type:"operator/member/0",ind:{type:"attribute",value:"defineProperty","do":"return"}}},{type:"data/string",value:"extend","do":"return"},{type:"data/object",value:[{type:"data/label",value:"value",ind:{type:"data/function",ind:{type:"args/declare",value:[{type:"data/string",value:"t"}]},dep:{type:"housing/block",code:[{type:"statement",value:"var",ind:{type:"data/variable",value:"e","do":{type:"operator/assignment/0",ind:{type:"data/variable",value:"this","do":"return"}},after:{type:"operator/comma/0",ind:{type:"data/variable",value:"r","do":{type:"operator/assignment/0",ind:{type:"data/variable",value:"Array","do":{type:"operator/member/0",ind:{type:"attribute",value:"prototype","do":{type:"operator/member/0",ind:{type:"attribute",value:"slice","do":{type:"operator/member/0",ind:{type:"attribute",value:"call","do":{type:"housing/call",ind:{type:"args/call",value:[{type:"data/variable",value:"arguments","do":"return"},{type:"data/number",value:"1","do":"return"}]}}}}}}}}}}}}}},{type:"statement",value:"return",ind:{type:"data/function",ind:{type:"args/declare",value:[]},dep:{type:"housing/block",code:[{type:"data/variable",value:"e","do":{type:"operator/member/0",ind:{type:"attribute",value:"apply","do":{type:"housing/call",ind:{type:"args/call",value:[{type:"data/variable",value:"this","do":"return"},{type:"data/variable",value:"r","do":"return"}]}}}},after:{type:"operator/comma/0",ind:{type:"data/variable",value:"t","do":{type:"operator/member/0",ind:{type:"attribute",value:"apply","do":{type:"housing/call",ind:{type:"args/call",value:[{type:"data/variable",value:"this","do":"return"},{type:"data/variable",value:"arguments","do":"return"}]}}}}}}}]}}}]}}}]}]}}}}}];
+
+<code>
+	<call val="Object.defineProperty">
+		<var val="Object.prototype"></var>
+		<str val="extend"></str>
+		<obj>
+			<func tag="value">
+				<args>
+					<var val="e"></var>
+				</args>
+				<block>
+					<set>
+						<com>
+							<var val="t">
+								<op val="assignment/0">
+									<call val="Array.prototype.slice.call">
+										<var val="arguments"></var>
+										<num val="1"></num>
+									</call>
+								</op>
+							</var>
+							<var val="a">
+								<op val="assignment/0">
+							</var>
+						</com>
+					</set>
+					<ret>
+						<func>
+							<args></args>
+							<block>
+								<com>
+									<call val="t.apply">
+										<var val="this"></var>
+										<var val="a"></var>
+									</call>
+									<call val="e.apply">
+										<var val="this"></var>
+										<var val="arguments"></var>
+									</call>
+								</com>
+							</block>
+						</func>
+					</ret>
+				</block>
+			</func>
+		</obj>
+	</call>
+</code>
