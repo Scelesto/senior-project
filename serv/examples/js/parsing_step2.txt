@@ -16,14 +16,16 @@ code=[{type:"data/variable",value:"Object","do":{type:"operator/member/0",ind:{t
 						<com>
 							<var val="t">
 								<op val="assignment/0">
+									<var val="this"></var>
+								</op>
+							</var>
+							<var val="a">
+								<op val="assignment/0">
 									<call val="Array.prototype.slice.call">
 										<var val="arguments"></var>
 										<num val="1"></num>
 									</call>
 								</op>
-							</var>
-							<var val="a">
-								<op val="assignment/0">
 							</var>
 						</com>
 					</set>
