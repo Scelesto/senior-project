@@ -20,7 +20,7 @@ code=[
 									type:'operator/member/0',
 									ind:{
 										type:'attribute',
-										value:'defineProperty',
+										value:'prototype',
 										do:'return'
 									}
 								}
