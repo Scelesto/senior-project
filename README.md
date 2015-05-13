@@ -7,7 +7,9 @@ In the "serv" folder there is the contents of a web application which serves thi
 1. Download the contents of the "serv" folder anywhere on your server.
 	- You can change the folder name or move it however much you want.
 2. Open it up in a web browser.
+
 ##System requirements:
 - Apache server or HTACCESS support
 - PHP support
+
 ###[PROJECT CREDITS](CREDITS.md "CREDITS")
