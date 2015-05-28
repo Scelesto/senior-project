@@ -29,11 +29,19 @@
 				}
 			}
 			return false
+		}},
+		dupl:{value:function(){
+			var r=[];
+			if(this.constructor==Array){
+				for(var i=0;i<this.length;i++){r.push(this[i])}
+			}else{
+				r={};for(i in this){r[i]=this[i]}
+			}return r;
 		}}
 	});
 	Object.defineProperty(Array.prototype,'del',{value:function(index){
 		delete this[index];
-		var ret=[]
+		var ret=[];
 		for(var i=0;i<this.length;i++){
 			if(typeof(this[i])!='undefined'){
 				ret.push(this[i])
@@ -42,7 +50,7 @@
 		return ret;
 	}});
 	window['prs']=function(input){
-		var special=/["'`.\/&|();:=[\]{}!+\-*?%<>~^\s]/,
+		var special=/["'`.,\/&|();:=[\]{}!+\-*?%<>~^\s]/,
 		finish=/[.&|:=*?%<>)\]}^]/,
 		varname=/[^0-9!@#][^!@#]*/,
 		operators={
@@ -183,7 +191,15 @@
 			'from',
 			'as',
 			'with'
-		],datatypes={
+		],s_data={
+			actasfunc:[
+			
+			],statmod:[
+				'var'
+			],special:[
+		
+			]
+		},datatypes={
 			string:{
 				inclusive:false,
 				separt:false,
@@ -249,7 +265,7 @@
 			}
 		},fill='null/nextlevel',TERMINAL=function(char){
 			this.char=char;
-			var guess,child,opMult,data;
+			var guess,child,opMult,data,special;
 			this.exists=true;
 			switch(this.char){
 				case '"':
@@ -303,6 +319,47 @@
 					//quoted
 					break;
 				case '(':
+					special=function(){
+						var argdefinefunc=function(){
+							var oldcode=code.dupl(),oldloc=location.dupl(),oldhere=here,oldhouse=house,newcode;
+							code=[];
+							location=[];
+							for(++i;i<input.length;++i){
+								if(input[i]==')'){E('return');break;}
+								loc_refresh();
+							}
+							newcode=code.dupl();
+							code=oldcode;
+							location=oldloc;
+							here=oldhere;
+							house=oldhouse;
+							return newcode;
+						},tmp_end=location[location.length-1],tmp_here,tmp_test,tmp_dep;
+						if(here.type=='data/variable'){
+							location=location.del(location.length-1);
+							tmp_here=code.loc(location);
+							tmp_test=tmp_here.type=='statement'&&tmp_here.value=='function';
+							location.push(tmp_end);
+							if(tmp_test){
+								E({type:'args/declare',value:argdefinefunc()});
+								location=location.del(location.length-1);
+								tmp_dep=code.loc(location);
+								tmp_dep.dep=fill;
+								code=code.loc(location,tmp_dep);
+								//function x(){}
+								return;
+							}
+							E({type:'housing/call',ind:{type:'args/call',value:argdefinefunc()}});
+							//call x()
+							return;
+						}
+						if(here.type=='statement'&&here.value=='function'){
+							//x=function(){}
+							return;
+						}
+						//group
+						return;
+					}
 					//declare function(){}
 					//declare function x(){}
 					//call function();
@@ -372,6 +429,7 @@
 					//assignment
 					//unary
 					//add
+
 					//quoted
 					break;
 				case '-':
@@ -433,6 +491,7 @@
 			this.child=child?child:false;
 			this.opMult=opMult?opMult:false;
 			this.data=data?data:false;
+			this.special=special?special:false;
 		},types_raw={
 			data:{
 				pure:false
@@ -471,6 +530,7 @@
 				location.push(house);
 				code=code.loc(location,o.valueOf());
 				buffer="";
+				return true;
 			}
 		},loc_refresh=function(){
 			here=code.loc(location);
@@ -496,24 +556,36 @@
 				E=actions['traditional'];
 				return general();
 			}
-		},retreat=function(){
+		},retreat=function(lvl){
 			while(code.loc(location).constructor!=Array){
+				var tmploc=location[location.length-1];
 				location=location.del(location.length-1);
+				if(lvl=='statement'&&code.loc(location).type=='statement'){
+					location.push(tmploc);
+					break;
+				}
 			}
 		},deal_with_buffer=function(){
 			//variable
 			if(varname.test(buffer)&&!special.test(buffer)){
 				if(statement.indexOf(buffer)==-1){
-					E({type:'data/variable',value:buffer,do:fill});
-					return true;
+					return E({type:'data/variable',value:buffer,do:fill});
 				}else{
 					//it's a statement
+					if(s_data.actasfunc.indexOf(buffer)!=-1){
+						//deal with it like a function
+					}
+					if(s_data.statmod.indexOf(buffer)!=-1){
+						return E({type:'statement',value:buffer,ind:fill});
+					}
+					if(s_data.special.indexOf(buffer)!=-1){
+						//figure out what to do
+					}
 				}
 			}
 			//number
 			if(datatypes.number.reg.test(buffer)){
-				E({type:'data/number',value:buffer,do:fill});
-				return true;
+				return E({type:'data/number',value:buffer,do:fill});
 			}
 			//operator
 			opTestRoot=(new TERMINAL(buffer[0]));
@@ -528,8 +600,7 @@
 				//ok, so it wasn't that character.  actually test it now.
 				var foundOperator=opTest(buffer);
 				if(foundOperator!==false){
-					E({type:'operator/'+foundOperator,ind:fill});
-					return true;
+					return E({type:'operator/'+foundOperator,ind:fill});
 				}
 			}
 		},opTestRoot,opTest=function(potOp){
@@ -579,10 +650,22 @@
 			if(input[i]==';'){
 				if(buffer!=""&&deal_with_buffer()){return loc_refresh()}
 				E('return');
-				retreat();
+				retreat('housing');
 				return true;
 			}
 			if(special.test(input[i])){
+				if(/\s/.test(input[i])&&deal_with_buffer()){return loc_refresh()}
+				if(input[i]==','){
+					if(buffer!=""&&deal_with_buffer()){return loc_refresh()}
+					E('return');
+					retreat('statement');
+					var heretmp=code.loc(location);
+					heretmp.after={type:'operator/comma/0',ind:fill};
+					code=code.loc(location,heretmp);
+					location.push('after');
+					buffer="";
+					return true;
+				}
 				if(buffer!=""&&term&&term.child){
 					if(term.child.length==1){
 						var rawtype=types_raw[term.child[0][house]];
@@ -608,6 +691,12 @@
 					E({type:td.isDatatype,value:fill});
 					buffer+=input[i];
 				}
+				for(var j in housing){
+					if(input[i]==housing[j][0]&&term.special){
+						if(deal_with_buffer()){return loc_refresh()}
+						return term.special();
+					}
+				}
 			}else{
 				if(special.test(buffer)){
 					deal_with_buffer();
@@ -621,7 +710,7 @@
 		}
 		//CHECK FOR ERRORS
 		if(code.root_search(fill)){
-			return false;
+			//return false;
 		}
 		return code;
 		//RUN CONVERSIONS ON LFO
@@ -631,3 +720,4 @@
 		//OUTPUT OR SEND TO SERVER
 	}
 })();
+prs('var a=function(){(function(){alert()})()}');
